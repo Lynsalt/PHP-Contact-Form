@@ -1,0 +1,36 @@
+h1{
+	text-align:center;
+}
+label{
+	color: #fff;
+}
+.formContainer{
+  max-width:500px;
+  padding:10px;
+  margin: 0 auto;
+  background: #6f84f3;
+}
+.formContainer input{
+  padding:10px;
+}
+textarea#message{
+  padding:10px;
+}
+
+h3.successMessage, .errorMessage{
+  text-align:center;
+  color:#fff;
+}
+span#status{
+	color:#ffffff;
+}
+input#submit-btn{
+	margin:10px;
+	background-color:orange;
+	border:0;
+}
+.formElements{
+  display: flex;
+  flex-direction: column;
+  margin:10px;
+}

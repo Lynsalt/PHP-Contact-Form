@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset ="UTF-8">
+	<title>PHP Contact Form</title>
+	<link rel="stylesheet" href="style.css"/>
+	
+</head>
+<body>
+	<h1>HTML 5, AJAX, PHP Contact Form</h1>
+
+   <form id="contact-form" onsubmit="submitForm(); return false;">
+       <div class="formContainer">
+       	 <div class="formElements">
+       	 	<label for="fullname">Full Name</label>
+       	 	<input type="text" id="fullname" placeholder="Enter Full Name" required/>
+       	 </div>
+       	 <div class="formElements">
+       	 	<label for="email">Email</label>
+       	 	<input type="email" id="email" placeholder="Enter Email Address" required/>
+       	 </div>
+       	 <div class="formElements">
+       	 	<label for="message">Comments</label>
+       	 	<textarea id="message" placeholder="Write your message" rows="10" required></textarea>
+       	 </div>
+       	 <div class="buton-Holder">
+       	 	<input type="submit" id="submit-btn" value="Submit Form"><span id="status"></span>
+       	 	<div id="formMessage"></div>
+       	 </div>
+       </div>
+   </form>
+   <script>
+    function _(id){ 
+    	return document.getElementById(id); 
+    }
+function submitForm(){
+	_("submit-btn").disabled = true;
+	_("status").innerHTML = 'please wait ...';
+	var formdata = new FormData();
+	formdata.append( "fullname", _("fullname").value );
+	formdata.append( "email", _("email").value );
+	formdata.append( "message", _("message").value );
+	var ajax = new XMLHttpRequest();
+	ajax.open( "POST", "formparser.php" );
+	ajax.onreadystatechange = function() {
+		if(ajax.readyState == 4 && ajax.status == 200) {
+			if(ajax.responseText == "success"){
+				_("status").innerHTML = '';
+				_("formMessage").innerHTML = '<h3 class="successMessage">Thanks '+_("fullname").value+', your message has been sent.</h3>';
+			} else {
+				_("status").innerHTML = ajax.responseText;
+				_("submit-btn").disabled = false;
+			}
+		}
+	}
+	ajax.send( formdata );
+}
+</script>
+
+</body>
+</html>
